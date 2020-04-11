@@ -1,0 +1,166 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void Menu(){
+    cout<<"What are you going to do?"<<endl;
+    cout<<"If you want to see properties, press 1"<<endl;
+    cout<<"If you want to chage properties, press 2"<<endl;
+    cout<<"If you want to calculate quantity by firm, press 3"<<endl;
+    cout<<"If you want exit programm, press 4"<<endl;
+}
+
+struct Prod{
+    string article;
+    int quantity;
+    string firm;
+    int price;
+};
+
+class Product {
+    int quantity_1;
+    int price_1;
+    int quantity_2;
+    int price_2;
+    string firm_1="Tefal";
+    string firm_2="Supra";
+public:
+    Product() {
+        quantity_1=20;
+        quantity_2=2;
+        price_1=400;
+        price_2=38000;
+    }
+    int GetQuantity_1(){
+        return quantity_1;
+    }
+     int GetQuantity_2(){
+        return quantity_2;
+    }
+     int GetPrice_1(){
+        return price_1;
+    }
+     int GetPrice_2(){
+        return price_2;
+    }
+    string GetFirm_1(){
+        return firm_1;
+    }
+    string GetFirm_2(){
+        return firm_2;
+    }
+};
+
+class TV: public Product
+{
+    int quantity_tv;
+    int price_tv;
+public:
+    TV(){
+        quantity_tv=20;
+        price_tv=400;
+    }
+    int GetQuantity_tv(){
+        return quantity_tv;
+    }
+
+     int GetPrice_tv(){
+        return price_tv;
+    }
+};
+
+class Fridge: public Product
+{
+    int quantity_fridge;
+    int price_fridge;
+public:
+    Fridge(){
+        quantity_fridge=2;
+        price_fridge=38000;
+    }
+    int GetQuantity_fridge(){
+        return quantity_fridge;
+    }
+
+     int GetPrice_fridge(){
+        return price_fridge;
+    }
+};
+
+int main(){
+    setlocale(LC_ALL, "rus");
+    TV obj_TV;
+    Fridge obj_Fridge;
+    int x;
+    string firm;
+    Prod obj_Struct[3];
+    obj_Struct[0].article="TV";
+    obj_Struct[1].article="Fridge";
+    obj_Struct[0].quantity=obj_TV.GetQuantity_tv();
+    obj_Struct[1].quantity=obj_Fridge.GetQuantity_fridge();
+    obj_Struct[0].price=obj_TV.GetPrice_tv();
+    obj_Struct[1].price=obj_Fridge.GetPrice_fridge();
+    obj_Struct[0].firm=obj_TV.GetFirm_1();
+    obj_Struct[1].firm=obj_Fridge.GetFirm_2();
+    
+    Menu();
+    cin>>x;
+  
+    switch(x)
+    {case 1:
+        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+        cout << "==================================================================" << endl;
+        for (int i = 0; i < 2; i++)
+        { 
+            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+        } 
+        x=0;
+        Menu();
+        cin>>x;
+    case 2:
+        for (int i = 0; i < 2; i++)
+        {
+            cout << "Enter quantity of product: ";
+            cin >> obj_Struct[i].quantity;
+            cout << "Enter firm of product ";
+            cin >> obj_Struct[i].firm;
+            cout << "Enter price of product: ";
+            cin >> obj_Struct[i].price;
+            cout << endl;
+        }
+        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+        cout << "==================================================================" << endl;
+        for (int i = 0; i < 2; i++)
+        { 
+        cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm  << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+        } 
+        x=0;
+        Menu();
+        cin>>x;
+ 
+    case 3:
+        cout<<"Enter firm, for what will be a sort ("<< obj_Struct[0].firm<<'\t'<<obj_Struct[1].firm<<"): "<<endl;
+        cin>>firm;
+        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+        cout << "==================================================================" << endl;
+        for (int i = 0; i < 2; i++)
+        { 
+            if(obj_Struct[i].firm==firm)
+            {
+            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+            }
+            else continue;
+        } 
+        x=0;
+        Menu();
+        cin>>x;
+    case 4:
+        cout<<"Bye";
+        break;
+    
+    }   
+    return 0;
+}
+
+    
+    
