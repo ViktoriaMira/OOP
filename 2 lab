@@ -15,6 +15,11 @@ struct Prod{
     int quantity;
     string firm;
     int price;
+    int TV_brightness;
+    int TV_usb;
+    int Fridge_height;
+    int Fridge_volume;
+    
 };
 
 class Product {
@@ -52,43 +57,41 @@ public:
 };
 
 class TV: public Product
-{
-    int quantity_tv;
-    int price_tv;
+{ int brightness;
+  int quantity_usb;
 public:
-    TV(){
-        quantity_tv=20;
-        price_tv=400;
+    TV(){       
+        brightness=500;
+        quantity_usb=6;
     }
-    int GetQuantity_tv(){
-        return quantity_tv;
+    int GetQuantity_usb(){
+        return quantity_usb;
     }
 
-     int GetPrice_tv(){
-        return price_tv;
+     int GetBrightness(){
+        return brightness;
     }
 };
 
 class Fridge: public Product
 {
-    int quantity_fridge;
-    int price_fridge;
+    int height;
+    int volume;
 public:
     Fridge(){
-        quantity_fridge=2;
-        price_fridge=38000;
+        height=2001;
+        volume=433;
     }
-    int GetQuantity_fridge(){
-        return quantity_fridge;
+    int GetHeight(){
+        return height;
     }
 
-     int GetPrice_fridge(){
-        return price_fridge;
+     int Getvolume(){
+        return volume;
     }
 };
 
 int main(){
-    setlocale(LC_ALL, "rus");
     TV obj_TV;
     Fridge obj_Fridge;
     int x;
@@ -96,23 +99,36 @@ int main(){
     Prod obj_Struct[3];
     obj_Struct[0].article="TV";
     obj_Struct[1].article="Fridge";
-    obj_Struct[0].quantity=obj_TV.GetQuantity_tv();
-    obj_Struct[1].quantity=obj_Fridge.GetQuantity_fridge();
-    obj_Struct[0].price=obj_TV.GetPrice_tv();
-    obj_Struct[1].price=obj_Fridge.GetPrice_fridge();
+    obj_Struct[0].quantity=obj_TV.GetQuantity_1();
+    obj_Struct[1].quantity=obj_Fridge.GetQuantity_2();
+    obj_Struct[0].price=obj_TV.GetPrice_1();
+    obj_Struct[1].price=obj_Fridge.GetPrice_2();
     obj_Struct[0].firm=obj_TV.GetFirm_1();
     obj_Struct[1].firm=obj_Fridge.GetFirm_2();
+    obj_Struct[0].TV_brightness=obj_TV.GetBrightness();
+    obj_Struct[0].TV_usb=obj_TV.GetQuantity_usb();
+    obj_Struct[1].Fridge_height=obj_Fridge.GetHeight();
+    obj_Struct[1].Fridge_volume=obj_Fridge.Getvolume();
+    obj_Struct[1].TV_brightness=0;
+    obj_Struct[1].TV_usb=0;
+    obj_Struct[0].Fridge_height=0;
+    obj_Struct[0].Fridge_volume=0;
+    
+    
     
     Menu();
     cin>>x;
   
     switch(x)
     {case 1:
-        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << "brigh.\t" << "USB\t" << "Height\t" <<"Volume" <<endl;
         cout << "==================================================================" << endl;
         for (int i = 0; i < 2; i++)
         { 
-            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' 
+            << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' 
+            << obj_Struct[i].price << '\t' << obj_Struct[i].TV_brightness << '\t'<< obj_Struct[i].TV_usb << '\t'<< 
+            obj_Struct[i].Fridge_height << '\t' << obj_Struct[i].Fridge_volume <<endl;
         } 
         x=0;
         Menu();
@@ -128,11 +144,14 @@ int main(){
             cin >> obj_Struct[i].price;
             cout << endl;
         }
-        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << "brigh.\t" << "USB\t" << "Height\t" <<"Volume" <<endl;
         cout << "==================================================================" << endl;
         for (int i = 0; i < 2; i++)
         { 
-        cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm  << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' 
+            << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' 
+            << obj_Struct[i].price << '\t' << obj_Struct[i].TV_brightness << '\t'<< obj_Struct[i].TV_usb << '\t'<< 
+            obj_Struct[i].Fridge_height << '\t' << obj_Struct[i].Fridge_volume <<endl;
         } 
         x=0;
         Menu();
@@ -141,13 +160,16 @@ int main(){
     case 3:
         cout<<"Enter firm, for what will be a sort ("<< obj_Struct[0].firm<<'\t'<<obj_Struct[1].firm<<"): "<<endl;
         cin>>firm;
-        cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << endl;
+         cout << "Id\t"<< "Article\t" << "Firm\t" << "Quant.\t" << "Price\t" << "brigh.\t" << "USB\t" << "Height\t" <<"Volume" <<endl;
         cout << "==================================================================" << endl;
         for (int i = 0; i < 2; i++)
         { 
             if(obj_Struct[i].firm==firm)
             {
-            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' << obj_Struct[i].price << '\t' << endl;
+            cout << i + 1 << '\t' << obj_Struct[i].article << '\t' 
+            << obj_Struct[i].firm << '\t' << obj_Struct[i].quantity << '\t' 
+            << obj_Struct[i].price << '\t' << obj_Struct[i].TV_brightness << '\t'<< obj_Struct[i].TV_usb << '\t'<< 
+            obj_Struct[i].Fridge_height << '\t' << obj_Struct[i].Fridge_volume <<endl;
             }
             else continue;
         } 
