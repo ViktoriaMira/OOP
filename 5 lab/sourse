@@ -1,0 +1,110 @@
+#include<iostream>
+#include"Header.h"
+using namespace std;
+
+
+int main()
+{
+
+setlocale(LC_ALL, "ru");
+
+
+List<int> list;
+
+for (int i = 0; i < 10000; i++) //создание списка с 10000 элементов
+{
+list.push_back(rand() % 10);
+
+}
+cout « "Список из 10000 элементов создан!" « endl;
+
+int a, b, c;
+
+
+List<TV> TV_objects;
+List<Fridge> Fridge_objects;
+
+
+cout « "Введите значение ярксти, количество USB и фирму (0 - Tefal, 1 - Supra) для первого элемента в списке телевизоров"
+« endl;
+
+cin » a;
+
+cin » b;
+
+cin » c;
+
+TV_objects.push_back(TV(a, b, c));
+
+
+
+int VL;
+
+cout « "Введите количество элементов в списке телевизоров" « endl;
+cin » VL;
+for (int i = 0; i<VL; i++) {
+
+cout « "Введите значение ярксти, количество USB и фирму (0 - Tefal, 1 - Supra) для " « i + 1 « " телевизора" « endl;
+
+cin » a;
+
+cin » b;
+
+cin » c;
+
+TV_objects.push_back(TV(a, b, c));
+
+continue;
+
+}
+
+cout « "Введите длину, ширину и фирму (0 - Tefal, 1 - Supra) для первого холодильника" « endl;
+
+cin » a;
+
+cin » b;
+
+cin » c;
+
+Fridge_objects.push_back(Fridge(a, b, c));
+
+cout « "Введите количество элементов в списке холодильников" « endl;
+cin » VL;
+for (int i = 0; i<VL; i++)
+{
+
+cout « "Введите длину, ширину и фирму (0 - Tefal, 1 - Supra) для " « i + 1 « " холодильника" « endl;
+
+cin » a;
+
+cin » b;
+
+cin » c;
+
+Fridge_objects.push_back(Fridge(a, b, c));
+
+continue;
+
+}
+
+int firm, TV_counter=0,Fridge_counter=0;
+cout « "Введите фирму, по которой хотите посчитать количество товаров (0 - Tefal, 1 - Supra)" « endl;
+cin » firm;
+for (int i = 0; i < TV_objects.GetSize(); i++)
+{
+if (firm == TV_objects[i].GetFirmTV())
+{
+TV_counter++;
+}
+}
+for (int i = 0; i < Fridge_objects.GetSize(); i++)
+{
+if (firm==Fridge_objects[i].GetFirmFridge())
+{
+Fridge_counter++;
+}
+}
+cout « "Количество товара по фирме: " « Fridge_counter + TV_counter « endl;
+
+
+}
