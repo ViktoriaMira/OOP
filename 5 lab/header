@@ -1,0 +1,400 @@
+#include<iostream>
+using namespace std;
+
+
+/*
+* односвязный список
+* реализация
+*/
+
+
+template<typename T>
+class List
+{
+public:
+List();
+~List();
+
+//удаление первого элемента в списке
+void pop_front();
+
+//добавление элемента в конец списка
+void push_back(T data);
+
+// очистить список
+void clear();
+
+// получить количество елементов в списке
+int GetSize() { return Size; }
+
+// перегруженный оператор []
+T& operator[](const int index);
+
+//добавление элемента в начало списка
+void push_front(T data);
+
+//добавление элемента в список по указанному индексу
+void insert(T data, int index);
+
+//удаление элемента в списке по указанному индексу
+void removeAt(int index);
+
+//удаление последнего элемента в списке
+void pop_back();
+
+private:
+
+
+template<typename T>
+class Node
+{
+public:
+Node * pNext;
+T data;
+
+Node(T data = T(), Node *pNext = nullptr)
+{
+this->data = data;
+this->pNext = pNext;
+}
+};
+int Size;
+Node<T> *head;
+};
+
+
+template<typename T>
+List<T>::List()
+{
+Size = 0;
+head = nullptr;
+}
+
+
+template<typename T>
+List<T>::~List()
+{
+clear();
+}
+
+
+template<typename T>
+void List<T>::pop_front()
+{
+Node<T> *temp = head;
+
+head = head->pNext;
+
+delete temp;
+
+Size--;
+
+}
+
+template<typename T>
+void List<T>::push_back(T data)
+{
+if (head == nullptr)
+{
+head = new Node<T>(data);
+}
+else
+{
+Node<T> *current = this->head;
+
+while (current->pNext != nullptr)
+{
+current = current->pNext;
+}
+current->pNext = new Node<T>(data);
+
+}
+
+Size++;
+}
+
+template<typename T>
+void List<T>::clear()
+{
+while (Size)
+{
+pop_front();
+}
+}
+
+
+template<typename T>
+T & List<T>::operator[](const int index)
+{
+int counter = 0;
+
+Node<T> *current = this->head;
+
+while (current != nullptr)
+{
+if (counter == index)
+{
+return current->data;
+}
+current = current->pNext;
+counter++;
+}
+}
+
+template<typename T>
+void List<T>::push_front(T data)
+{
+head = new Node<T>(data, head);
+Size++;
+}
+
+template<typename T>
+void List<T>::insert(T data, int index)
+{
+
+if (index == 0)
+{
+push_front(data);
+}
+else
+{
+Node<T> *previous = this->head;
+
+for (int i = 0; i < index - 1; i++)
+{
+previous = previous->pNext;
+}
+
+Node<T> *newNode = new Node<T>(data, previous->pNext);
+
+previous->pNext = newNode;
+
+Size++;
+}
+
+
+
+
+
+}
+
+template<typename T>
+void List<T>::removeAt(int index)
+{
+if (index == 0)
+{
+pop_front();
+}
+else
+{
+Node<T> *previous = this->head;
+for (int i = 0; i < index - 1; i++)
+{
+previous = previous->pNext;
+}
+
+
+Node<T> *toDelete = previous->pNext;
+
+previous->pNext = toDelete->pNext;
+
+delete toDelete;
+
+Size--;
+}
+
+}
+
+template<typename T>
+void List<T>::pop_back()
+{
+removeAt(Size - 1);
+}
+
+
+struct Prod {
+
+string article;
+
+int quantity;
+
+string firm;
+
+int price;
+
+int TV_brightness;
+
+int TV_usb;
+
+int Fridge_height;
+
+int Fridge_volume;
+
+};
+
+class Product {
+
+int quantity_1;
+
+int price_1;
+
+int quantity_2;
+
+int price_2;
+
+string firm_1 = "Tefal";
+
+string firm_2 = "Supra";
+
+public:
+
+Product() {
+
+quantity_1 = 20;
+
+quantity_2 = 2;
+
+price_1 = 400;
+
+price_2 = 38000;
+
+}
+
+int GetQuantity_1() {
+
+return quantity_1;
+
+}
+
+int GetQuantity_2() {
+
+return quantity_2;
+
+}
+
+int GetPrice_1() {
+
+return price_1;
+
+}
+
+int GetPrice_2() {
+
+return price_2;
+
+}
+
+string GetFirm_1() {
+
+return firm_1;
+
+}
+
+string GetFirm_2() {
+
+return firm_2;
+
+}
+
+};
+
+class TV : public Product
+
+{
+int brightness;
+
+int quantity_usb;
+
+int firm_TV;
+
+public:
+
+TV() {
+
+brightness = 500;
+
+quantity_usb = 6;
+
+}
+
+TV(int b, int q_usb, int f_TV) {
+
+brightness = b;
+
+quantity_usb = q_usb;
+
+firm_TV = f_TV;
+
+}
+
+int GetQuantity_usb() {
+
+return quantity_usb;
+
+}
+
+int GetBrightness() {
+
+return brightness;
+
+}
+
+int GetFirmTV() {
+return firm_TV;
+}
+
+};
+
+class
+ 
+Fridge : public Product
+
+{
+
+int height;
+
+int volume;
+
+int firm_Fridge;
+
+public:
+
+Fridge() {
+
+height = 2001;
+
+volume = 433;
+
+}
+
+Fridge(int h, int v, int f_Fridge) {
+
+height = h;
+
+volume = v;
+
+firm_Fridge = f_Fridge;
+
+}
+
+int GetHeight() {
+
+return height;
+
+}
+
+int Getvolume() {
+
+return volume;
+
+}
+
+void Get() {
+cout « "Фирма холодильника: " « firm_Fridge « "\nВысота: " « height « "\nМощность:" « volume « endl;
+}
+
+int GetFirmFridge() {
+return firm_Fridge;
+}
+
+};
